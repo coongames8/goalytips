@@ -85,7 +85,7 @@ export default function PaymentPage({ setUserData }) {
 		reference: new Date().getTime().toString(),
 		email: currentUser.email,
 		amount: price * 100,
-		publicKey: "pk_live_d0d5675da8738d0b7cc7485cbf74c5e1c505bb27",
+		publicKey: "pk_live_d2e5187d5e0f9edeb5a8be8c42fe66628906c370",//pk_live_d0d5675da8738d0b7cc7485cbf74c5e1c505bb27
 		currency: "KES",
 		metadata: { name: currentUser.email },
 		text: "Pay Now",
