@@ -2,25 +2,32 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese');
 
 :root {
-    --error: #f04f30;
-    --white: #fff;
-    --black: #000000;
-    --neon-blue: #e67e22;
-    --dark-blue: #0d9e44;
-    --blue: #f39c12;
-    --grey: #6c757d;
-    --hue: #00ae58;
-    --primary: #03f1c5;
-    --dark: #343a40;
-    --darker: #171616;
-}
+  --error: #ff4d4f;
 
+  --white: #ffffff;
+  --black: #000000;
+
+  /* Goalytips Theme Colors */
+  --primary: #10b981;        /* green */
+  --primary-dark: #065f46;   /* dark green */
+  --accent: #f59e0b;         /* gold/orange */
+  --accent-light: #fbbf24;   /* lighter gold */
+
+  --neon-blue: #f59e0b;      /* replaced with gold */
+  --dark-blue: #065f46;
+
+  --blue: #f59e0b;           /* now orange */
+  --grey: #6c757d;
+
+  --dark: #111827;           /* deep dark */
+  --darker: #020617;         /* darker bg */
+}
   *, *::before, *::after{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font: 17px "Montserrat", sans-serif;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    font-size: 17px;
   }
 
   .App{
@@ -102,28 +109,19 @@
 
     }
 
-    .btn{
-      background: var(--blue);
-      border-radius: 5px;
-      padding: 8px 20px;
+    .btn {
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      border-radius: 8px;
+      padding: 10px 20px;
       color: var(--white);
-      transition: all 0.2s;
-      -webkit-transition: all 0.4s;
-      -moz-transition: all 0.4s;
-      -ms-transition: all 0.4s;
-      -o-transition: all 0.4s;
-      text-decoration: none;
+      border: none;
       cursor: pointer;
-      box-shadow: none;
-      border: 1px solid var(--dark-blue);
-      &:hover:not(:disabled){
-          background: var(--dark-blue);
-          color: var(--white);
-          -webkit-transform: translateY(-5px);
-          -ms-transform: translateY(-5px);
-          -o-transform: translateY(-5px);
-          transform: translateY(-5px);
-          box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.25);
-      }
+      transition: all 0.3s ease;
+    }
+    
+    .btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     }
   }

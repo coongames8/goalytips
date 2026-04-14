@@ -362,7 +362,7 @@
 .submit-btn {
 	width: 100%;
 	padding: 0.8rem;
-	background: linear-gradient(135deg, var(--neon-blue), #0066ff);
+	background: linear-gradient(135deg, var(--accent), var(--primary));
 	color: white;
 	border: none;
 	border-radius: 8px;
@@ -372,7 +372,7 @@
 	transition: all 0.3s ease;
 
 	&:hover {
-		background: linear-gradient(135deg, #0066ff, var(--neon-blue));
+		background: linear-gradient(135deg, var(--primary), var(--accent));
 		transform: translateY(-2px);
 	}
 
@@ -785,7 +785,7 @@
 .auth-btn {
 	width: 100%;
 	padding: 0.8rem;
-	background: linear-gradient(135deg, var(--neon-blue), #0066ff);
+	background: linear-gradient(135deg, var(--accent), var(--primary));
 	color: white;
 	border: none;
 	border-radius: 8px;
@@ -876,15 +876,10 @@
 }
 
 .glass-card {
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);
-	border-radius: 12px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	padding: 15px;
-	color: white;
-	transition: all 0.3s ease;
+	background: rgba(16, 185, 129, 0.08); /* green tint */
+	backdrop-filter: blur(12px);
+	border: 1px solid rgba(245, 158, 11, 0.2); /* gold border */
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .glass-card:hover {
@@ -1098,9 +1093,9 @@
 	}
 
 	&.active {
-		background: rgba(0, 119, 255, 0.2);
-		border-color: var(--neon-blue);
-		box-shadow: 0 5px 15px rgba(0, 119, 255, 0.2);
+		background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(16,185,129,0.2));
+	border-color: var(--accent);
+	box-shadow: 0 5px 15px rgba(245,158,11,0.3);
 	}
 }
 

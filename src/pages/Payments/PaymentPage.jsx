@@ -20,7 +20,7 @@ const paypalInitialOptions = {
 };
 
 // HashBack API Configuration
-const HASHBACK_API_URL = 'https://hash-back-server-samo-production.up.railway.app';
+const HASHBACK_API_URL = 'https://hash-back-server-goalytips-production.up.railway.app';
 
 // Fixed exchange rate (approximate KSH to USD)
 const EXCHANGE_RATE = 150; // 1 USD = 150 KSH

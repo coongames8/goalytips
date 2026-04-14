@@ -1,4 +1,4 @@
-const CACHE_NAME = "bethive-cache";
+const CACHE_NAME = "Goalytips-cache";
 const urlsToCache = ["/", "/index.html", "/manifest.json", "/logo512.png"];
 
 window.self.addEventListener("install", (event) => {

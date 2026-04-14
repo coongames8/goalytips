@@ -1,7 +1,7 @@
 {
-	"short_name": "BetHive",
-	"name": "BetHive",
-	"homepage": "https://bethive.onrender.com",
+	"short_name": "Goalytips",
+	"name": "Goalytips",
+	"homepage": "https://Goalytips.onrender.com",
 	"version": "0.1.0",
 	"description": "Get all the latest ✓Football Predictions, ✓Latest Football Betting Odds and livescores, results & fixtures for all leagues and competitions, including the Premier League, Championship and across the world.",
 	"icons": [
@@ -106,12 +106,12 @@
 		"type": "classic"
 	},
 	"developer": {
-		"name": "BetHive",
-		"url": "https://bethive.onrender.com"
+		"name": "Goalytips",
+		"url": "https://Goalytips.onrender.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/kkibe/BetHive"
+		"url": "https://github.com/kkibe/Goalytips"
 	},
 	"license": "ISC/MIT",
 	"keywords": [

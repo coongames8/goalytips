@@ -4,9 +4,9 @@ import { addDoc, collection, doc, getDoc, getDocs, getFirestore, limit, query, u
 
 const firebaseConfig = {
   apiKey: "AIzaSyCPtW7Ogs9LSB1yLWwKfWojZWNcD_GyabI",
-  authDomain: "bethive-1e5ba.firebaseapp.com",
-  projectId: "bethive-1e5ba",
-  storageBucket: "bethive-1e5ba.firebasestorage.app",
+  authDomain: "Goalytips-1e5ba.firebaseapp.com",
+  projectId: "Goalytips-1e5ba",
+  storageBucket: "Goalytips-1e5ba.firebasestorage.app",
   messagingSenderId: "510881950541",
   appId: "1:510881950541:web:5c778941d02a2a0c9c6504",
   measurementId: "G-1MQMTT0S9K"

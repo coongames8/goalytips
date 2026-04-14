@@ -36,7 +36,7 @@ export default function About() {
 			<AppHelmet title={"About"} location={"/about"} />
 
 			<div className="about-hero">
-				<h1 className="hero-title">About BetHive</h1>
+				<h1 className="hero-title">About Goalytips</h1>
 				<p className="hero-subtitle">
 					Your trusted source for football predictions and insights
 				</p>

@@ -8,7 +8,7 @@ export default function AppHelmet({ title, location }) {
 		<Helmet>
 			<meta charSet="utf-8" />
 			<title>
-				{title} | BetHive - 100% Guaranteed Winning Tips, Fixed VIP Football
+				{title} | Goalytips - 100% Guaranteed Winning Tips, Fixed VIP Football
 				Tips, Insights and News
 			</title>
 			<link rel="canonical" href={canonicalUrl} />

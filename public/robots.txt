@@ -3,7 +3,7 @@ User-agent: *
 Disallow:
 
 # Specify the sitemap location
-Sitemap: https://bethive.onrender.com/sitemap.xml
+Sitemap: https://Goalytips.onrender.com/sitemap.xml
 
 # (Optional) Restrict access to certain areas
 Disallow: /admin/

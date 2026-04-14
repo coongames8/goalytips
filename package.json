@@ -1,8 +1,8 @@
 {
-	"name": "BetHive",
+	"name": "Goalytips",
 	"private": true,
 	"version": "0.0.0",
-	"homepage": "https://bethive.onrender.com/",
+	"homepage": "https://Goalytips.onrender.com/",
 	"proxy": "*",
 	"type": "module",
 	"scripts": {

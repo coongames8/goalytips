@@ -80,7 +80,7 @@ const Footer = ({ user }) => {
 				<div className="footer-divider"></div>
 
 				<div className="footer-links">
-					<p className="copyright">&copy; BetHive {new Date().getFullYear()}</p>
+					<p className="copyright">&copy; Goalytips {new Date().getFullYear()}</p>
 					<NavLink to="/about#faq" className="footer-link">
 						FAQ
 					</NavLink>
