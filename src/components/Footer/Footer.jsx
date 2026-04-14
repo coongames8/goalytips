@@ -47,38 +47,6 @@ const Footer = ({ user }) => {
 	return (
 		<footer className="footer-glass">
 			<div className="footer-content">
-				<div className="social-section">
-					<h3 className="social-title">Connect With Us</h3>
-					<div className="social-links">
-						<Link
-							to={socialLinks.telegramChannel}
-							target="_blank"
-							className="social-icon"
-							aria-label="Telegram"
-						>
-							<Telegram />
-						</Link>
-						<Link
-							to={socialLinks.whatsappChannel}
-							target="_blank"
-							className="social-icon"
-							aria-label="WhatsApp"
-						>
-							<WhatsApp />
-						</Link>
-						<Link
-							to={socialLinks.facebookPage}
-							target="_blank"
-							className="social-icon"
-							aria-label="Facebook"
-						>
-							<Facebook />
-						</Link>
-					</div>
-				</div>
-
-				<div className="footer-divider"></div>
-
 				<div className="footer-links">
 					<p className="copyright">&copy; Goalytips {new Date().getFullYear()}</p>
 					<NavLink to="/about#faq" className="footer-link">

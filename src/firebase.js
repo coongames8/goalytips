@@ -3,13 +3,13 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } f
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, limit, query, updateDoc, where, orderBy, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCPtW7Ogs9LSB1yLWwKfWojZWNcD_GyabI",
-  authDomain: "Goalytips-1e5ba.firebaseapp.com",
-  projectId: "Goalytips-1e5ba",
-  storageBucket: "Goalytips-1e5ba.firebasestorage.app",
-  messagingSenderId: "510881950541",
-  appId: "1:510881950541:web:5c778941d02a2a0c9c6504",
-  measurementId: "G-1MQMTT0S9K"
+  apiKey: "AIzaSyBqHfrwEOoYkTJzi4XQsFfh4M3xjg8e6bs",
+  authDomain: "goalytics-5c239.firebaseapp.com",
+  projectId: "goalytics-5c239",
+  storageBucket: "goalytics-5c239.firebasestorage.app",
+  messagingSenderId: "260589878215",
+  appId: "1:260589878215:web:5a0c0fdf9dab435d4fb7e2",
+  measurementId: "G-KK0F3K4954"
 };
 
 const app = initializeApp(firebaseConfig);
