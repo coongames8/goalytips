@@ -8,6 +8,7 @@ import { db, getUser } from "../../firebase";
 import "./Payments.scss";
 import { AuthContext } from "../../AuthContext";
 import { PriceContext } from "../../PriceContext";
+import { useCurrency } from "../../CurrencyContext";
 import Swal from "sweetalert2";
 
 const npApi = new NowPaymentsApi({ apiKey: "D7YT1YV-PCAM4ZN-HX9W5M1-H02KFCV" });
@@ -28,6 +29,7 @@ const EXCHANGE_RATE = 150; // 1 USD = 150 KSH
 export default function PaymentPage({ setUserData }) {
   const { price, setPrice } = useContext(PriceContext); // price is always in KSH
   const { currentUser } = useContext(AuthContext);
+  const { symbol, convertPrice, country } = useCurrency();
   const [paymentType, setPaymentType] = useState("mpesa");
   const [currenciesArr, setCurrenciesArr] = useState(null);
   const [selectedCurrency, setSelectedCurrency] = useState("TUSD");
@@ -51,13 +53,17 @@ export default function PaymentPage({ setUserData }) {
   ];
 
   // All prices stored in KSH for PriceContext
+  const mpesaPlans = [
+    { id: "daily", value: 200, label: "Daily VIP" },
+    { id: "weekly", value: 700, label: "7 Days VIP" },
+    { id: "monthly", value: 2000, label: "30 Days VIP" },
+    { id: "yearly", value: 7500, label: "1 Year VIP" },
+  ];
   const subscriptionPlans = {
-    mpesa: [
-      { id: "daily", value: 200, label: "Daily VIP", price: "KSH 200" },
-      { id: "weekly", value: 700, label: "7 Days VIP", price: "KSH 700" },
-      { id: "monthly", value: 2000, label: "30 Days VIP", price: "KSH 2000" },
-      { id: "yearly", value: 7500, label: "1 Year VIP", price: "KSH 7500" },
-    ],
+    mpesa: mpesaPlans.map((p) => ({
+      ...p,
+      price: `${symbol} ${convertPrice(p.value).toLocaleString()}`,
+    })),
     crypto: [
       { id: "10", value: 1500, label: "Weekly", price: "$10" },
       { id: "15", value: 2400, label: "Monthly", price: "$16" },
@@ -206,7 +212,7 @@ export default function PaymentPage({ setUserData }) {
       html: `
         <div style="text-align: center;">
           <i class="fas fa-check-circle" style="font-size: 48px; color: #10b981;"></i>
-          <h3 style="margin: 15px 0;">KSh ${data.amount || price} Paid</h3>
+          <h3 style="margin: 15px 0;">${symbol} ${(data.amount ? convertPrice(data.amount) : convertPrice(price)).toLocaleString()} Paid</h3>
           <p>Your VIP subscription payment was successful!</p>
           <p style="font-size: 0.85rem; color: #666; margin-top: 10px;">
             Transaction ID: ${data.transactionId || data.TransactionID || 'N/A'}
@@ -345,7 +351,7 @@ export default function PaymentPage({ setUserData }) {
             <div style="text-align: center;">
               <i class="fas fa-mobile-alt" style="font-size: 48px; color: #065f46;"></i>
               <h3 style="margin: 15px 0;">Enter M-Pesa PIN</h3>
-              <p>Check your phone to authorize payment of <strong>KSH ${price}</strong></p>
+              <p>Check your phone to authorize payment of <strong>${symbol} ${convertPrice(price).toLocaleString()}</strong></p>
               <p style="margin-top: 10px;"><small>Phone: ${formattedPhone}</small></p>
               <div style="background: #f8f9ff; padding: 12px; border-radius: 8px; margin-top: 15px;">
                 <p style="font-size: 0.8rem; margin: 0; color: #666;">
@@ -514,9 +520,9 @@ export default function PaymentPage({ setUserData }) {
   // Helper to display price based on payment type
   const getDisplayPrice = () => {
     if (paymentType === "mpesa") {
-      return `KSH ${price}`;
+      return `${symbol} ${convertPrice(price).toLocaleString()}`;
     } else {
-      return `$${getCurrentPriceInUsd()}`;
+      return `${getCurrentPriceInUsd()}`;
     }
   };
 

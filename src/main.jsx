@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./AuthContext";
 import { PriceContextProvider } from './PriceContext.jsx';
 import { ThemeContextProvider } from './ThemeContext.jsx';
+import { CurrencyProvider } from './CurrencyContext.jsx';
 import './App.scss';
 import './pages.scss';
 
@@ -13,9 +14,11 @@ createRoot(document.getElementById('root')).render(
     <ThemeContextProvider>
       <AuthContextProvider>
         <PriceContextProvider>
-          <BrowserRouter>
+          <CurrencyProvider>
+            <BrowserRouter>
             <App />
           </BrowserRouter>
+          </CurrencyProvider>
         </PriceContextProvider>
       </AuthContextProvider>
     </ThemeContextProvider>
