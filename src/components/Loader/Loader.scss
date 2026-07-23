@@ -1,10 +1,10 @@
 :root {
-	--hue: 210;
-	--bg: hsl(var(--hue), 10%, 85%);
-	--fg: hsl(var(--hue), 10%, 15%);
-	--red: hsl(344, 75%, 40%);
+	--hue: 160;
+	--loader-bg: var(--bg);
+	--loader-fg: var(--text);
+	--red: hsl(344, 75%, 50%);
 	--white: hsl(0, 0%, 100%);
-	--blue: hsl(213, 81%, 21%);
+	--blue: hsl(160, 70%, 35%);
 	--trans-dur: 0.3s;
 	font-size: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
 }
@@ -13,9 +13,8 @@
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	background-color: var(--bg);
-	color: var(--fg);
-	display: flex;
+	background-color: var(--loader-bg);
+	color: var(--loader-fg);
 	font: 1em/1.5 sans-serif;
 	min-height: 60vh;
 	transition: background-color var(--trans-dur), color var(--trans-dur);
@@ -24,7 +23,6 @@
 	$debug: false;
 	--dur: 3s;
 	@if $debug == true {
-		// use negative decimals to step through frames
 		--delay: calc(var(--dur) * 0);
 		outline: 1px solid;
 	}
@@ -82,7 +80,6 @@
 
 					@for $f from 1 through length($frameArray) {
 						$frame: nth($frameArray, $f);
-						// no style needed for 0s delay
 						@if $frame != 0 {
 							&:nth-child(#{$f}) {
 								@if $debug == true {
@@ -111,71 +108,41 @@ $circumference2: 106.8;
 $circumference3: 99;
 
 @keyframes ball {
-	from {
-		transform: rotate(0) translate(0, -15.75px);
-	}
-	to {
-		transform: rotate(1turn) translate(0, -15.75px);
-	}
+	from { transform: rotate(0) translate(0, -15.75px); }
+	to { transform: rotate(1turn) translate(0, -15.75px); }
 }
 @keyframes ball-shadow {
-	from {
-		transform: rotate(0);
-	}
-	to {
-		transform: rotate(-1turn);
-	}
+	from { transform: rotate(0); }
+	to { transform: rotate(-1turn); }
 }
 @keyframes ball-texture {
-	from {
-		transform: translate(-16px, 0);
-	}
-	to {
-		transform: translate(48px, 0);
-	}
+	from { transform: translate(-16px, 0); }
+	to { transform: translate(48px, 0); }
 }
 @keyframes stripe-dot {
-	from {
-		r: 1.25px;
-	}
-	16.67%,
-	to {
-		r: 0;
-	}
+	from { r: 1.25px; }
+	16.67%, to { r: 0; }
 }
 @keyframes stripe-rotate {
-	from {
-		transform: rotate(0);
-	}
-	to {
-		transform: rotate(1turn);
-	}
+	from { transform: rotate(0); }
+	to { transform: rotate(1turn); }
 }
 @keyframes stripe1 {
-	from,
-	to {
-		stroke-dashoffset: -$circumference1 * 0.835;
-	}
+	from, to { stroke-dashoffset: -$circumference1 * 0.835; }
 	50% {
 		animation-timing-function: $ease-in-out;
 		stroke-dashoffset: -$circumference1 * 0.66;
 	}
 }
 @keyframes stripe2 {
-	from,
-	to {
-		stroke-dashoffset: -$circumference2 * 0.75;
-	}
+	from, to { stroke-dashoffset: -$circumference2 * 0.75; }
 	50% {
 		animation-timing-function: $ease-in-out;
 		stroke-dashoffset: -$circumference2 * 0.5;
 	}
 }
 @keyframes stripe3 {
-	from,
-	to {
-		stroke-dashoffset: -$circumference3 * 0.735;
-	}
+	from, to { stroke-dashoffset: -$circumference3 * 0.735; }
 	50% {
 		animation-timing-function: $ease-in-out;
 		stroke-dashoffset: -$circumference3 * 0.49;

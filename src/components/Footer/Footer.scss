@@ -1,13 +1,12 @@
 .footer-glass {
 	width: 100%;
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);
-	border-top: 1px solid rgba(255, 255, 255, 0.18);
+	background: var(--bg-elevated);
+	backdrop-filter: blur(14px);
+	-webkit-backdrop-filter: blur(14px);
+	border-top: 1px solid var(--border);
 	padding: 2rem 0;
-	color: white;
+	color: var(--text-secondary);
 	position: relative;
-	background: var(--black);
 }
 
 .footer-content {
@@ -17,7 +16,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1.5rem;
+	gap: 1.25rem;
 }
 
 .footer-links {
@@ -31,31 +30,31 @@
 
 .copyright {
 	margin: 0;
-	opacity: 0.8;
+	color: var(--text-muted);
 }
 
 .footer-link {
-	color: white;
+	color: var(--text-secondary);
 	text-decoration: none;
-	opacity: 0.8;
-	transition: opacity 0.3s ease;
+	font-weight: 500;
+	transition: color 0.2s ease;
 
 	&:hover {
-		opacity: 1;
+		color: var(--primary);
 		text-decoration: underline;
 	}
 }
 
 .scroll-top {
 	position: fixed;
-	bottom: 1rem;
-	right: 1rem;
-	width: 40px;
-	height: 40px;
+	bottom: 1.5rem;
+	right: 1.5rem;
+	width: 42px;
+	height: 42px;
 	border-radius: 50%;
-	background: rgba(0, 119, 255, 0.2);
-	border: 1px solid rgba(0, 119, 255, 0.3);
-	color: white;
+	background: var(--gradient-primary);
+	border: none;
+	color: #fff;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -65,6 +64,7 @@
 	visibility: hidden;
 	transform: translateY(20px);
 	z-index: 1000;
+	box-shadow: var(--shadow-md);
 
 	&.visible {
 		opacity: 1;
@@ -73,37 +73,21 @@
 	}
 
 	&:hover {
-		background: rgba(0, 119, 255, 0.3);
-		transform: translateY(-3px);
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-glow);
 	}
 
-	svg {
-		font-size: 1.5rem;
-	}
+	svg { font-size: 1.3rem; }
 }
 
 @media (max-width: 768px) {
-	.footer-content {
-		padding: 0 1rem;
-	}
-
-	.social-links {
-		gap: 1rem;
-	}
-
-	.footer-links {
-		gap: 1rem;
-		//flex-direction: column;
-	}
-
+	.footer-content { padding: 0 1rem; }
+	.footer-links { gap: 1rem; }
 	.scroll-top {
-		width: 40px;
-		height: 40px;
-		bottom: 0.5rem;
-		right: 0.5rem;
-
-		svg {
-			font-size: 1.2rem;
-		}
+		width: 38px;
+		height: 38px;
+		bottom: 1rem;
+		right: 1rem;
+		svg { font-size: 1.1rem; }
 	}
 }

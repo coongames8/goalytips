@@ -5,41 +5,39 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  background: rgba(0, 0, 0, 0.4);
+  padding: 90px 1rem 40px;
+  background: var(--bg);
 
-  h3{
-    color: var(--white);
-  }
+  h3 { color: var(--text); }
 }
 
 .payment-glass {
   width: 100%;
-  max-width: 800px;
-  background: rgba(255, 255, 255, 0.1);
-  background: var(--black);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  max-width: 760px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-lg);
   padding: 2rem;
-  color: white;
+  color: var(--text);
 }
 
 .payment-title {
   text-align: center;
   margin-bottom: 2rem;
-  font-size: 1.8rem;
-  color: white;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  color: var(--text);
+  font-weight: 700;
   position: relative;
 
   &::after {
     content: '';
     display: block;
-    width: 80px;
+    width: 64px;
     height: 3px;
-    background: var(--neon-blue);
+    background: var(--gradient-primary);
     margin: 10px auto 0;
     border-radius: 3px;
   }
@@ -47,128 +45,138 @@
 
 .method-selector {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
   justify-content: center;
+  flex-wrap: wrap;
 
   .method-option {
-    padding: 0.8rem 1.5rem;
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.7rem 1.4rem;
+    border-radius: 26px;
+    background: var(--surface);
+    border: 1px solid var(--border);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     display: flex;
     align-items: center;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--text-secondary);
 
-    input {
-      display: none;
-    }
+    input { display: none; }
 
     &:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: var(--surface-hover);
+      color: var(--text);
     }
 
     &.active {
-      background: rgba(0, 119, 255, 0.3);
-      border-color: rgba(0, 119, 255, 0.4);
-      font-weight: 500;
+      background: var(--gradient-primary);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
     }
   }
 }
 
 .plan-selector {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
 
   .plan-option {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
     padding: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 4px;
 
-    input {
-      display: none;
-    }
+    input { display: none; }
 
     .plan-label {
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      font-weight: 500;
     }
 
     .plan-price {
-      font-weight: 600;
-      color: var(--neon-blue);
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
     }
 
     &:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: var(--surface-hover);
+      transform: translateY(-2px);
     }
 
     &.active {
-      background: rgba(0, 119, 255, 0.2);
-      border-color: var(--neon-blue);
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0, 119, 255, 0.2);
+      background: var(--primary-50);
+      border-color: var(--primary);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
     }
   }
 }
 
 .crypto-details {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 
   h3 {
     text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
+    margin-bottom: 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 600;
   }
 
   .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 
     label {
       display: block;
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-      opacity: 0.8;
+      margin-bottom: 0.45rem;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      font-weight: 500;
     }
 
     .glass-select {
       width: 100%;
-      padding: 0.8rem;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 8px;
-      color: white;
-      font-size: 1rem;
-
-      option {
-        background: rgba(0, 0, 0, 0.8);
-      }
+      padding: 0.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+      &:focus { border-color: var(--primary); }
+      option { background: var(--bg-elevated); }
     }
   }
 
   .payment-info {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    background: var(--surface);
+    border-radius: 12px;
     padding: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 
     p {
       margin: 0.5rem 0;
       display: flex;
       justify-content: space-between;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
 
       span {
-        font-weight: 500;
-        color: var(--neon-blue);
+        font-weight: 600;
+        color: var(--primary);
         word-break: break-all;
         text-align: right;
         margin-left: 1rem;
@@ -182,85 +190,85 @@
 
     .glass-input {
       flex: 1;
-      padding: 0.8rem;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 8px;
-      color: white;
-      font-size: 0.9rem;
+      padding: 0.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.88rem;
+      outline: none;
     }
 
     .copy-btn {
-      width: 50px;
-      background: rgba(0, 119, 255, 0.2);
-      border: 1px solid rgba(0, 119, 255, 0.3);
-      border-radius: 8px;
-      color: white;
+      width: 48px;
+      background: var(--primary-50);
+      border: 1px solid var(--primary-100);
+      border-radius: 10px;
+      color: var(--primary);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      &:hover {
-        background: rgba(0, 119, 255, 0.3);
-      }
+      &:hover { background: var(--primary-100); }
 
-      .icon {
-        font-size: 1.2rem;
-      }
+      .icon { font-size: 1.1rem; }
     }
   }
 }
 
 .mpesa-payment {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   text-align: center;
 
   h3 {
-    margin-bottom: 1.5rem;
-    font-size: 1.3rem;
-    color: var(--black);
+    margin-bottom: 1.25rem;
+    font-size: 1.2rem;
+    color: var(--text);
+    font-weight: 600;
   }
 
   .paystack-btn {
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
     margin: 0 auto;
-    padding: 1rem;
-    background: linear-gradient(135deg, var(--accent), var(--primary));
-    color: white;
+    padding: 0.9rem;
+    background: var(--gradient-primary);
+    color: #fff;
     border: none;
-    border-radius: 30px;
+    border-radius: 28px;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 119, 255, 0.3);
+    transition: all 0.25s ease;
+    box-shadow: var(--shadow-md);
 
     &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0, 119, 255, 0.4);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
     }
   }
 }
 
+.paypal-payment {
+  margin-top: 1.5rem;
+  text-align: center;
+
+  h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+}
+
 @media (max-width: 768px) {
-  .payment-container {
-    padding: 1rem;
-  }
-
-  .payment-glass {
-    padding: 1.5rem;
-  }
-
-  .plan-selector {
-    grid-template-columns: 1fr;
-  }
-
+  .payment-container { padding: 80px 0.75rem 30px; }
+  .payment-glass { padding: 1.5rem; }
+  .plan-selector { grid-template-columns: 1fr 1fr; }
   .method-selector {
-    flex-direction: column;
-    align-items: stretch;
-
-    .method-option {
-      text-align: center;
-    }
+    flex-direction: row;
+    .method-option { flex: 1; justify-content: center; }
   }
 }

@@ -1,45 +1,47 @@
 .faqItem {
-	border: 1px solid var(--light-color);
-	border-radius: 5px;
-	padding: 5px 5px;
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	padding: 6px 14px;
 	position: relative;
 	overflow: hidden;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 1px solid var(--border);
+	background: var(--card-bg);
+	transition: border-color 0.25s ease, box-shadow 0.25s ease;
 
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);
-	border-radius: 8px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
 	div {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		cursor: pointer;
 		h3 {
 			margin: 0 35px 0 0;
-			//font-size: 1.5rem;
 			display: block;
 			text-align: left;
 			width: 100%;
-			color: rgba(255, 255, 255, 0.7);
+			font-size: 1rem;
+			font-weight: 600;
+			color: var(--text);
+			padding: 10px 0;
 		}
 		.icon {
 			display: inline-block;
 			position: absolute;
-			top: 12px;
-			right: 12px;
-			width: 22px;
-			height: 22px;
-			border: 1px solid;
-			border-radius: 22px;
+			top: 14px;
+			right: 14px;
+			width: 24px;
+			height: 24px;
+			border: 1px solid var(--border-strong);
+			border-radius: 50%;
 			cursor: pointer;
+			color: var(--text-secondary);
+			transition: all 0.2s ease;
 			&::before {
 				display: block;
 				position: absolute;
 				content: "";
-				top: 9px;
+				top: 10px;
 				left: 5px;
-				width: 10px;
+				width: 12px;
 				height: 2px;
 				background: currentColor;
 			}
@@ -48,58 +50,36 @@
 				position: absolute;
 				content: "";
 				top: 5px;
-				left: 9px;
+				left: 10px;
 				width: 2px;
-				height: 10px;
+				height: 12px;
 				background: currentColor;
+				transition: transform 0.25s ease;
 			}
 		}
 
 		.icon-opened {
-			display: inline-block;
-			position: absolute;
-			top: 18px;
-			right: 0;
-			width: 22px;
-			height: 22px;
-			border: 1px solid;
-			border-radius: 22px;
-			cursor: pointer;
-			&::before {
-				display: block;
-				position: absolute;
-				content: "";
-				top: 9px;
-				left: 5px;
-				width: 10px;
-				height: 2px;
-				background: currentColor;
+			@extend .icon;
+			&::after {
+				transform: scaleY(0);
 			}
 		}
 	}
 	p {
 		display: none;
-		margin: 30px 0 0;
-		margin: 2em 0;
+		margin: 12px 0 16px;
+		color: var(--text-secondary);
+		line-height: 1.6;
+		font-size: 0.95rem;
 	}
 
 	&.active {
-		box-shadow: 0 3px 6px var(--box-shadow);
-		transition: 2s ease-in;
-		&::before,
-		&::after {
-			color: var(--blue);
-			content: "\f075";
-			position: absolute;
-			opacity: 0.2;
-			top: 20px;
-			left: 20px;
-			z-index: 0;
-		}
+		box-shadow: var(--shadow-sm);
+		border-color: var(--primary-100);
 
 		p {
 			display: block;
-			color: var(--white);
+			color: var(--text-secondary);
 		}
 	}
 }

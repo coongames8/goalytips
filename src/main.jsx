@@ -3,19 +3,21 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx';
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./AuthContext";
+import { PriceContextProvider } from './PriceContext.jsx';
+import { ThemeContextProvider } from './ThemeContext.jsx';
 import './App.scss';
 import './pages.scss';
-import { PriceContextProvider } from './PriceContext.jsx';
-
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-  <AuthContextProvider>
-    <PriceContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </PriceContextProvider>
-  </AuthContextProvider>
+    <ThemeContextProvider>
+      <AuthContextProvider>
+        <PriceContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </PriceContextProvider>
+      </AuthContextProvider>
+    </ThemeContextProvider>
   </StrictMode>,
 )

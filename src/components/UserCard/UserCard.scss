@@ -1,8 +1,10 @@
 .user-card-minimal {
   width: 240px;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 3px 16px rgba(0, 0, 0, 0.06);
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
   position: relative;
   text-decoration: none;
   overflow: hidden;
@@ -11,70 +13,72 @@
   flex-direction: column;
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-100);
   }
 
   .card-header-minimal {
     position: relative;
 
     .cover-minimal {
-      height: 60px;
+      height: 64px;
       position: relative;
+      background: var(--gradient-hero);
     }
 
     .premium-indicator {
       position: absolute;
       top: 10px;
       right: 10px;
-      background: linear-gradient(45deg, #FFD700, #FFA500);
-      color: #000;
-      width: 22px;
-      height: 22px;
+      background: var(--gradient-accent);
+      color: #fff;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 14px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      box-shadow: var(--shadow-sm);
     }
 
     .avatar-wrapper {
       position: absolute;
-      bottom: -18px;
-      left: 14px;
+      bottom: -20px;
+      left: 16px;
 
       .avatar-minimal {
-        height: 50px;
-        width: 50px;
+        height: 52px;
+        width: 52px;
         border-radius: 50%;
-        border: 2.5px solid #fff;
+        border: 3px solid var(--bg-elevated);
         object-fit: cover;
         object-position: center;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        box-shadow: var(--shadow-sm);
       }
     }
   }
 
   .card-body-minimal {
-    padding: 24px 14px 14px;
+    padding: 26px 16px 16px;
 
     .user-info-compact {
       margin-bottom: 14px;
 
       .plan-name {
         font-size: 1rem;
-        font-weight: 600;
-        color: #2D3748;
+        font-weight: 700;
+        color: var(--text);
         margin-bottom: 3px;
         line-height: 1.3;
         letter-spacing: -0.01em;
       }
 
       .user-handle {
-        font-size: 0.8rem;
-        color: #718096;
-        font-weight: 400;
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        font-weight: 500;
       }
     }
 
@@ -89,15 +93,14 @@
         gap: 8px;
 
         .icon-small {
-          font-size: 0.9rem;
-          color: #4A5568;
-          opacity: 0.7;
+          font-size: 0.95rem;
+          color: var(--text-muted);
           flex-shrink: 0;
         }
 
         .text-email, .text-date {
-          font-size: 0.8rem;
-          color: #4A5568;
+          font-size: 0.82rem;
+          color: var(--text-secondary);
           line-height: 1.4;
         }
 
@@ -110,6 +113,6 @@
 
   @media screen and (max-width: 448px) {
     width: 100%;
-    max-width: 280px;
+    max-width: 300px;
   }
 }

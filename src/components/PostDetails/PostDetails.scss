@@ -1,18 +1,17 @@
 .glass-panel {
-    background: rgba(255, 255, 255, 0.1);
-    background: var(--darker);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-    padding: 25px;
-    color: white;
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 18px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-lg);
+    padding: 24px;
+    color: var(--text);
     position: sticky;
     right: 0;
     width: 100%;
-    max-width: 350px;
-    min-height: 400px;
+    max-width: 360px;
+    min-height: 420px;
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease;
@@ -29,17 +28,20 @@
       .close-icon {
         display: block;
         position: absolute;
-        top: 15px;
-        right: 15px;
+        top: 16px;
+        right: 16px;
         cursor: pointer;
-        color: white;
-        background: rgba(255, 255, 255, 0.1);
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: 50%;
-        padding: 5px;
-        transition: all 0.3s ease;
+        padding: 4px;
+        transition: all 0.25s ease;
 
         &:hover {
-          background: rgba(255, 255, 255, 0.2);
+          background: var(--error);
+          color: #fff;
+          border-color: var(--error);
           transform: rotate(90deg);
         }
       }
@@ -49,49 +51,46 @@
   .detail-header {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 14px;
     margin-bottom: 20px;
 
       .premium-badge {
-        background: linear-gradient(135deg, #ffd700, #ff9900);
-        color: #000;
-        font-size: 0.7rem;
-        font-weight: bold;
-        padding: 3px 8px;
-        border-radius: 10px;
+        background: var(--gradient-accent);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 12px;
+        letter-spacing: 0.05em;
       }
-
 
     .match-info {
       flex: 1;
 
       .match-date {
         margin: 0;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 500;
-        color: var(--grey);
+        color: var(--text-muted);
         text-align: center;
-
-        //margin: 5px 0;
-        //font-size: 0.9rem;
-        //opacity: 0.8;
       }
 
       .odds-chip {
         display: inline-block;
-        background: rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(0, 119, 255, 0.3);
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-size: 0.85rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        padding: 4px 12px;
+        border-radius: 16px;
+        font-size: 0.82rem;
       }
     }
   }
 
   .match-details {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--surface);
     border-radius: 12px;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 20px;
 
     .team-row {
@@ -101,26 +100,29 @@
       padding: 10px 0;
 
       .team-name {
-        font-weight: 500;
-        font-size: 1.1rem;
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: var(--text);
       }
 
       .team-score {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--surface-active);
+        color: var(--text);
         border-radius: 50%;
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: bold;
+        font-weight: 700;
+        font-size: 0.95rem;
       }
     }
 
     .divider {
       height: 1px;
-      background: rgba(255, 255, 255, 0.1);
-      margin: 5px 0;
+      background: var(--border);
+      margin: 4px 0;
       border: none;
     }
   }
@@ -129,19 +131,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
+
     .prediction-chip {
       display: inline-flex;
       align-items: center;
-      background: rgba(0, 255, 170, 0.1);
-      border: 1px solid rgba(0, 255, 170, 0.2);
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-weight: 500;
+      background: var(--primary-50);
+      border: 1px solid var(--primary-100);
+      padding: 8px 14px;
+      border-radius: 18px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--primary);
 
       .prediction-icon {
         margin-right: 8px;
-        color: var(--neon-blue);
-        font-size: 1.2rem;
+        color: var(--primary);
+        font-size: 1.1rem;
       }
     }
   }
@@ -154,32 +160,32 @@
 
     .glass-btn {
       padding: 12px;
-      border-radius: 8px;
+      border-radius: 10px;
       text-align: center;
       text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
+      font-weight: 600;
+      transition: all 0.25s ease;
 
       &.premium-btn {
-        background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 153, 0, 0.2));
-        border: 1px solid rgba(255, 215, 0, 0.3);
-        color: gold;
+        background: var(--gradient-accent);
+        border: none;
+        color: #fff;
 
         &:hover {
-          background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 153, 0, 0.3));
           transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
         }
       }
 
       &.edit-btn {
-        background: rgba(0, 119, 255, 0.2);
-        border: 1px solid rgba(0, 119, 255, 0.3);
-        color: white;
+        background: var(--surface);
+        border: 1px solid var(--border-strong);
+        color: var(--text);
 
         &:hover {
-          background: rgba(0, 119, 255, 0.3);
-          transform: translateY(-2px);
+          background: var(--surface-hover);
+          border-color: var(--primary);
+          color: var(--primary);
         }
       }
     }
