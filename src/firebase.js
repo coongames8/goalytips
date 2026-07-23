@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, limit, query, updateDoc, where, orderBy, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -48,6 +48,15 @@ export const registerUser = (username, email, password, setSuccess, setError) =>
   });
   return;
 }
+
+export const resetPassword = async (email, setSuccess, setError) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    setSuccess("Password reset email sent. Check your inbox.");
+  } catch (error) {
+    setError(error.message);
+  }
+};
 
 export const updateUser = async (userId, isPremium, subscription, subDate) => {
   const usercollref = doc(db, 'users', userId);

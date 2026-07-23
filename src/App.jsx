@@ -13,6 +13,7 @@ import About from './pages/About';
 import AdminTips from "./pages/AdminTips";
 import { Login } from "./pages/Login";
 import Register from "./pages/Register";
+import { ForgotPassword } from "./pages/ForgotPassword";
 import Error from './pages/Error';
 import EditTip from "./pages/EditTip";
 import UserProfile from "./pages/userProfile/UserProfile";
@@ -144,6 +145,7 @@ function App() {
               <Route path='*' element={<Error />} />
               <Route path='login' element={<Login />} />
               <Route path='register' element={<Register />} />
+              <Route path='forgot-password' element={<ForgotPassword />} />
 
             </Routes>
             <Footer user={currentUser} />

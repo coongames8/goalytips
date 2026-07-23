@@ -59,6 +59,12 @@ export const Login = () => {
 
                     {error && <div className="auth-error">{error} - Please try again</div>}
 
+                    <div className="form-group" style={{ textAlign: "right" }}>
+                        <NavLink to="/forgot-password" className="auth-link" style={{ fontSize: "0.85rem" }}>
+                            Forgot password?
+                        </NavLink>
+                    </div>
+
                     <button type="submit" className="auth-btn">
                         LOGIN
                     </button>

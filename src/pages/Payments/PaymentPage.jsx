@@ -3,6 +3,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { Check, CopyAll } from "@mui/icons-material";
 import AppHelmet from "../../components/AppHelmet";
 import NowPaymentsApi from "@nowpaymentsio/nowpayments-api-js";
+import KoraPayment from "kora-checkout";
 import { doc, setDoc } from "firebase/firestore";
 import { db, getUser } from "../../firebase";
 import "./Payments.scss";
@@ -10,6 +11,8 @@ import { AuthContext } from "../../AuthContext";
 import { PriceContext } from "../../PriceContext";
 import { useCurrency } from "../../CurrencyContext";
 import Swal from "sweetalert2";
+
+const KORAPAY_KEY = "pk_live_v3G6gawdvs1ugJmqo3cfQaGJS5njbJTrjLyxT2gB";
 
 const npApi = new NowPaymentsApi({ apiKey: "D7YT1YV-PCAM4ZN-HX9W5M1-H02KFCV" });
 
@@ -29,7 +32,7 @@ const EXCHANGE_RATE = 150; // 1 USD = 150 KSH
 export default function PaymentPage({ setUserData }) {
   const { price, setPrice } = useContext(PriceContext); // price is always in KSH
   const { currentUser } = useContext(AuthContext);
-  const { symbol, convertPrice, country } = useCurrency();
+  const { symbol, convertPrice, currency, country } = useCurrency();
   const [paymentType, setPaymentType] = useState("mpesa");
   const [currenciesArr, setCurrenciesArr] = useState(null);
   const [selectedCurrency, setSelectedCurrency] = useState("TUSD");
@@ -41,6 +44,7 @@ export default function PaymentPage({ setUserData }) {
   const [network, setNetwork] = useState("");
   const [paypalKey, setPaypalKey] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [generatingAddress, setGeneratingAddress] = useState(false);
   const wsRef = useRef(null);
   const currentCheckoutIdRef = useRef(null);
   const statusCheckIntervalRef = useRef(null);
@@ -48,6 +52,7 @@ export default function PaymentPage({ setUserData }) {
   // Payment methods
   const paymentMethods = [
     { id: "mpesa", label: "M-Pesa 📱" },
+    { id: "korapay", label: "Korapay 💳" },
     { id: "crypto", label: "Crypto ₿" },
     { id: "paypal", label: "PayPal 💳" },
   ];
@@ -61,6 +66,10 @@ export default function PaymentPage({ setUserData }) {
   ];
   const subscriptionPlans = {
     mpesa: mpesaPlans.map((p) => ({
+      ...p,
+      price: `${symbol} ${convertPrice(p.value).toLocaleString()}`,
+    })),
+    korapay: mpesaPlans.map((p) => ({
       ...p,
       price: `${symbol} ${convertPrice(p.value).toLocaleString()}`,
     })),
@@ -432,17 +441,32 @@ export default function PaymentPage({ setUserData }) {
 
   // Crypto payment - use USD price
   const getCryptoAddress = async () => {
-    const usdPrice = getCurrentPriceInUsd();
-    const params = {
-      price_amount: parseFloat(usdPrice),
-      price_currency: "usd",
-      pay_currency: selectedCurrency.toLowerCase(),
-    };
-    const response = await npApi.createPayment(params);
-    setPayAmount(response.pay_amount);
-    setPayCurrency(response.pay_currency);
-    setAddress(response.pay_address);
-    setNetwork(response.network);
+    setGeneratingAddress(true);
+    setAddress(null);
+    setPayAmount("");
+    setPayCurrency("");
+    setNetwork("");
+    try {
+      const usdPrice = getCurrentPriceInUsd();
+      const params = {
+        price_amount: parseFloat(usdPrice),
+        price_currency: "usd",
+        pay_currency: selectedCurrency.toLowerCase(),
+      };
+      const response = await npApi.createPayment(params);
+      setPayAmount(response.pay_amount);
+      setPayCurrency(response.pay_currency);
+      setAddress(response.pay_address);
+      setNetwork(response.network);
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: error.message || "Could not generate payment address. Please try again.",
+        icon: "error"
+      });
+    } finally {
+      setGeneratingAddress(false);
+    }
   };
 
   const handleCopy = (e) => {
@@ -466,8 +490,7 @@ export default function PaymentPage({ setUserData }) {
     };
 
     fetchCurrencies();
-    if (paymentType === "crypto") getCryptoAddress();
-  }, [selectedCurrency, price, paymentType]);
+  }, []);
 
   // Force PayPal buttons to re-render when price changes
   useEffect(() => {
@@ -519,11 +542,43 @@ export default function PaymentPage({ setUserData }) {
 
   // Helper to display price based on payment type
   const getDisplayPrice = () => {
-    if (paymentType === "mpesa") {
+    if (paymentType === "mpesa" || paymentType === "korapay") {
       return `${symbol} ${convertPrice(price).toLocaleString()}`;
     } else {
       return `${getCurrentPriceInUsd()}`;
     }
+  };
+
+  // Handle Korapay payment
+  const handleKorapayPayment = () => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+    const amount = convertPrice(price);
+    const payCurrency = currency === "NGN" ? "NGN" : "KES";
+    const paymentOptions = {
+      key: KORAPAY_KEY,
+      reference: new Date().getTime().toString(),
+      amount,
+      currency: payCurrency,
+      customer: {
+        name: currentUser?.email || "Goalytips User",
+        email: currentUser?.email || "coongames8@gmail.com",
+      },
+      onSuccess: () => {
+        setIsProcessing(false);
+        handleUpgrade();
+      },
+      onFailed: (err) => {
+        setIsProcessing(false);
+        Swal.fire({
+          title: "Payment Failed",
+          text: err?.message || "Korapay payment was not successful. Please try again.",
+          icon: "error"
+        });
+      },
+    };
+    const payment = new KoraPayment();
+    payment.initialize(paymentOptions);
   };
 
   return (
@@ -592,37 +647,51 @@ export default function PaymentPage({ setUserData }) {
                 </select>
               </div>
 
-              <div className="payment-info">
-                <p>
-                  Amount:{" "}
-                  <span>
-                    {payAmount} {payCurrency?.toUpperCase()}
-                  </span>
-                </p>
-                <p>
-                  Network: <span>{network?.toUpperCase()}</span>
-                </p>
-                <p>
-                  Address: <span>{address}</span>
-                </p>
-              </div>
+              <button
+                onClick={getCryptoAddress}
+                className="paystack-btn"
+                disabled={generatingAddress}
+                style={{
+                  opacity: generatingAddress ? 0.7 : 1,
+                  cursor: generatingAddress ? "not-allowed" : "pointer",
+                  marginBottom: "1.5rem"
+                }}
+              >
+                {generatingAddress ? "Generating..." : "Generate Payment Address"}
+              </button>
 
-              <div className="address-copy">
-                <input
-                  type="text"
-                  value={address || ""}
-                  readOnly
-                  ref={addressRef}
-                  className="glass-input"
-                />
-                <button onClick={handleCopy} className="copy-btn">
-                  {copied ? (
-                    <Check className="icon" />
-                  ) : (
-                    <CopyAll className="icon" />
-                  )}
-                </button>
-              </div>
+              {address && (
+                <>
+                  <div className="payment-info">
+                    <p>
+                      Amount:{" "}
+                      <span>
+                        {payAmount} {payCurrency?.toUpperCase()}
+                      </span>
+                    </p>
+                    <p>
+                      Network: <span>{network?.toUpperCase()}</span>
+                    </p>
+                  </div>
+
+                  <div className="address-copy">
+                    <input
+                      type="text"
+                      value={address || ""}
+                      readOnly
+                      ref={addressRef}
+                      className="glass-input"
+                    />
+                    <button onClick={handleCopy} className="copy-btn">
+                      {copied ? (
+                        <Check className="icon" />
+                      ) : (
+                        <CopyAll className="icon" />
+                      )}
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           ) : paymentType === "mpesa" ? (
             <div className="mpesa-payment">
@@ -639,6 +708,23 @@ export default function PaymentPage({ setUserData }) {
                 }}
               >
                 {isProcessing ? "Processing..." : "Pay with M-Pesa"}
+              </button>
+            </div>
+          ) : paymentType === "korapay" ? (
+            <div className="mpesa-payment">
+              <h3>
+                GET {getSubscriptionPeriod().toUpperCase()} VIP FOR {getDisplayPrice()}
+              </h3>
+              <button
+                onClick={handleKorapayPayment}
+                className="paystack-btn"
+                disabled={isProcessing}
+                style={{
+                  opacity: isProcessing ? 0.7 : 1,
+                  cursor: isProcessing ? "not-allowed" : "pointer"
+                }}
+              >
+                {isProcessing ? "Processing..." : "Pay with Korapay"}
               </button>
             </div>
           ) : (
