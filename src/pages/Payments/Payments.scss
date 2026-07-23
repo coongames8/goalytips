@@ -263,6 +263,96 @@
   }
 }
 
+.generate-address-btn {
+  padding: 0.9rem 1.5rem;
+  background: linear-gradient(135deg, #f7931a 0%, #e8730c 100%);
+  color: #fff;
+  border: none;
+  border-radius: 28px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(247, 147, 26, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(247, 147, 26, 0.4);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  &.full-width {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    display: flex;
+    padding: 0.95rem;
+  }
+}
+
+.crypto-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+
+  .generate-address-btn {
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .check-status-btn {
+    flex: 1;
+    min-width: 160px;
+    padding: 0.9rem 1.5rem;
+    background: var(--gradient-primary);
+    color: #fff;
+    border: none;
+    border-radius: 28px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+  }
+}
+
+.polling-indicator {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--primary-100);
+  border-radius: 10px;
+  color: var(--primary);
+  font-size: 0.88rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  i {
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .payment-container { padding: 80px 0.75rem 30px; }
   .payment-glass { padding: 1.5rem; }
@@ -270,5 +360,12 @@
   .method-selector {
     flex-direction: row;
     .method-option { flex: 1; justify-content: center; }
+  }
+  .crypto-actions {
+    flex-direction: column;
+    .generate-address-btn,
+    .check-status-btn {
+      width: 100%;
+    }
   }
 }
