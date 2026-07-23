@@ -33,7 +33,7 @@ export default function PaymentPage({ setUserData }) {
   const { price, setPrice } = useContext(PriceContext); // price is always in KSH
   const { currentUser } = useContext(AuthContext);
   const { symbol, convertPrice, currency, country } = useCurrency();
-  const [paymentType, setPaymentType] = useState("mpesa");
+  const [paymentType, setPaymentType] = useState("korapay");
   const [currenciesArr, setCurrenciesArr] = useState(null);
   const [selectedCurrency, setSelectedCurrency] = useState("TUSD");
   const addressRef = useRef();
@@ -54,10 +54,10 @@ export default function PaymentPage({ setUserData }) {
 
   // Payment methods
   const paymentMethods = [
-    { id: "mpesa", label: "M-Pesa 📱" },
+    /*{ id: "mpesa", label: "M-Pesa 📱" },*/
     { id: "korapay", label: "Korapay 💳" },
     { id: "crypto", label: "Crypto ₿" },
-    { id: "paypal", label: "PayPal 💳" },
+    /*{ id: "paypal", label: "PayPal 💳" },*/
   ];
 
   // All prices stored in KSH for PriceContext
@@ -77,13 +77,13 @@ export default function PaymentPage({ setUserData }) {
       price: `${symbol} ${convertPrice(p.value).toLocaleString()}`,
     })),
     crypto: [
-      { id: "10", value: 1500, label: "Weekly", price: "$10" },
+      { id: "10", value: 2000, label: "Weekly", price: "$10" },
       { id: "15", value: 2400, label: "Monthly", price: "$16" },
       { id: "50", value: 7500, label: "Yearly", price: "$50" },
     ],
     paypal: [
       { id: "2", value: 300, label: "Daily", price: "$2" },
-      { id: "10", value: 1500, label: "Weekly", price: "$10" },
+      { id: "10", value: 2000, label: "Weekly", price: "$10" },
       { id: "15", value: 2400, label: "Monthly", price: "$16" },
       { id: "50", value: 7500, label: "Yearly", price: "$50" },
     ],
@@ -178,7 +178,7 @@ export default function PaymentPage({ setUserData }) {
 
   const getSubscriptionPeriod = () => {
     if (price === 200 || price === 300) return "Daily";
-    if (price === 700 || price === 1500) return "Weekly";
+    if (price === 700 || price === 2000) return "Weekly";
     if (price === 2000 || price === 2400) return "Monthly";
     return "Yearly";
   };

@@ -31,7 +31,7 @@ export default function Pricing() {
         {
             id: 2,
             title: "Gold",
-            price: 650,
+            price: 700,
             duration: "/Week",
             features: [
                 "Get the scoop on this week's matches",
@@ -42,7 +42,7 @@ export default function Pricing() {
         {
             id: 3,
             title: "Platinum",
-            price: 1500,
+            price: 2000,
             duration: "/Month",
             features: [
                 "Plan ahead with our monthly predictions",
