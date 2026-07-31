@@ -1,3 +1,3 @@
-﻿# bGoalytipsnew
+# bGoalytipsnew
 # Goalytips
 # Goalytips
