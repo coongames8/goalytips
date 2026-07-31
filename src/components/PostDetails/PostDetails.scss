@@ -191,7 +191,7 @@
     }
   }
 
-  @media (max-width: 576px) {
+  /*@media (max-width: 576px) {
     .glass-panel {
       position: fixed;
       top: 0;
@@ -207,6 +207,15 @@
 
       .close-icon {
         display: block !important;
+      }
+    }
+  }*/
+
+  @media (max-width: 576px) {
+    .glass-panel {
+      display: none;
+      &.active {
+        display: flex;
       }
     }
   }

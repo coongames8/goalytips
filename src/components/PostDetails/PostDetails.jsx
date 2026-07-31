@@ -30,6 +30,34 @@ export default function PostDetail({ data, userData }) {
     }
   }, [currentUser]);
 
+  useEffect(() => {
+	const closeModal = () => {
+	  const detailPanel = document.querySelector(".post-detail");
+	  if (detailPanel && detailPanel.classList.contains("active")) {
+		detailPanel.classList.remove("active");
+		setActive(null);
+	  }
+	};
+  
+	const handleOutsideClick = (e) => {
+	  const detailPanel = document.querySelector(".post-detail");
+	  if (detailPanel && detailPanel.classList.contains("active")) {
+		// Check if click is outside the modal and not on the close button
+		if (!detailPanel.contains(e.target)) {
+		  closeModal();
+		}
+	  }
+	};
+  
+	document.addEventListener("mousedown", handleOutsideClick);
+	window.addEventListener("scroll", closeModal);
+  
+	return () => {
+	  document.removeEventListener("mousedown", handleOutsideClick);
+	  window.removeEventListener("scroll", closeModal);
+	};
+  }, []);
+
   function formatDate() {
     const date = new Date();
     return date.toLocaleDateString('en-US');
