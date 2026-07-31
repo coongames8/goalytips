@@ -20,6 +20,7 @@
 		"@paypal/react-paypal-js": "^8.7.0",
 		"@paystack/inline-js": "^2.22.1",
 		"firebase": "^11.0.1",
+		"flutterwave-react-v3": "^1.3.3",
 		"kora-checkout": "^1.0.4",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
