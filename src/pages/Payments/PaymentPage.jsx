@@ -12,7 +12,7 @@ import { PriceContext } from "../../PriceContext";
 import { useCurrency } from "../../CurrencyContext";
 import Swal from "sweetalert2";
 
-const KORAPAY_KEY = "pk_live_v3G6gawdvs1ugJmqo3cfQaGJS5njbJTrjLyxT2gB";
+const KORAPAY_KEY = "pk_live_KxNb5jDg18CQtJWzJt1RdgyMNsRo4D9NanrmE7nP";
 
 const npApi = new NowPaymentsApi({ apiKey: "D7YT1YV-PCAM4ZN-HX9W5M1-H02KFCV" });
 
@@ -20,11 +20,11 @@ const npApi = new NowPaymentsApi({ apiKey: "D7YT1YV-PCAM4ZN-HX9W5M1-H02KFCV" });
 const paypalInitialOptions = {
   "client-id": "AXIggvGGvXozbZhdkvizPLd89nVYW8KoyNlHO0gHx7hjY_Ah_IfgXihUQGf7T2HUUVYx-D5SNncM0CtU",
   currency: "USD",
-  intent: "capture",
+  intent: "capture", 
 };
 
 // HashBack API Configuration
-const HASHBACK_API_URL = 'https://hash-back-server-goalytips-production.up.railway.app';
+const HASHBACK_API_URL = 'https://hash-back-server-production.up.railway.app/';
 
 // Fixed exchange rate (approximate KSH to USD)
 const EXCHANGE_RATE = 150; // 1 USD = 150 KSH
@@ -54,7 +54,7 @@ export default function PaymentPage({ setUserData }) {
 
   // Payment methods
   const paymentMethods = [
-    /*{ id: "mpesa", label: "M-Pesa 📱" },*/
+    { id: "mpesa", label: "M-Pesa 📱" },
     { id: "korapay", label: "Korapay 💳" },
     { id: "crypto", label: "Crypto ₿" },
     /*{ id: "paypal", label: "PayPal 💳" },*/
