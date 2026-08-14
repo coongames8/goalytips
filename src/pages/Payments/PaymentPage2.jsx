@@ -73,8 +73,8 @@ export default function PaymentPage2({ setUserData }) {
     /*{ id: "mpesa", label: "M-Pesa 📱" },*/
     /*{ id: "korapay", label: "Korapay 💳" },*/
     /*{ id: "flutterwave", label: "Flutterwave 💳" },*/
-    /*{ id: "korapay", label: paymentType === "korapay" && currency === "KES" ? "Mobile (M-Pesa/Airtel)📲" : "Card/Bank 💳"},*/
-    { id: "korapay", label: "Mobile/Card/Bank 💳"},
+    { id: "korapay", label: paymentType === "korapay" && currency === "KES" ? "Mobile (M-Pesa/Airtel)📲" : "Card/Bank 💳"},
+    /*{ id: "korapay", label: "Mobile/Card/Bank 💳"},*/
     /*{ id: "paystack", label: "Paystack 💳" },*/
     { id: "crypto", label: "Crypto ₿" },
     /*{ id: "paypal", label: "PayPal 💳" },*/
@@ -1281,7 +1281,7 @@ export default function PaymentPage2({ setUserData }) {
                 {isProcessing ? "Processing..." : "Pay with M-Pesa"}
               </button>
             </div>
-          ) /*: paymentType === "korapay" && currency === "KES" ? (
+          ) : paymentType === "korapay" && currency === "KES" ? (
             <div className="mpesa-payment">
               <h3>
                 GET {getSubscriptionPeriod().toUpperCase()} VIP FOR {getDisplayPrice()}
@@ -1365,7 +1365,7 @@ export default function PaymentPage2({ setUserData }) {
                 {isProcessing ? "Processing..." : awaitingOtp ? "Submit OTP" : "Pay Now"}
               </button>
             </div>
-          )*/ : paymentType === "korapay" ? (
+          ) : paymentType === "korapay" ? (
             <div className="mpesa-payment">
               <h3>
                 GET {getSubscriptionPeriod().toUpperCase()} VIP FOR {getDisplayPrice()}
