@@ -246,7 +246,7 @@ export default function PaymentPage({ setUserData }) {
   // Render the appropriate payment component
   const renderPaymentComponent = () => {
     const commonProps = {
-      price,
+      price: convertPrice(price),
       setPrice,
       currentUser,
       symbol,
