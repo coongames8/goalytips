@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import './Pricing.scss'
-import { PriceContext } from '../../PriceContext';
+import { PriceContext } from '../../PriceContext'; 
 import { useCurrency } from '../../CurrencyContext';
 import { useNavigate } from 'react-router-dom';
 import { Star } from '@mui/icons-material';
@@ -10,7 +10,7 @@ export default function Pricing() {
     const { setPrice } = useContext(PriceContext);
     const { symbol, formatPrice, loading } = useCurrency();
 
-    const [billing, setBilling] = useState("Silver");
+    const [billing, setBilling] = useState("Gold");
 
     const handleClick = (price) => {
         setPrice(price)
@@ -132,7 +132,7 @@ export default function Pricing() {
 
       </div>
             <div className="pricing-grid wrapper">
-                {plans.filter(item => item.title === billing).map(item => {
+                {plans/*.filter(item => item.title === billing)*/.map(item => {
                     return <Item data={item} key={item.id} />
                 })}
             </div>

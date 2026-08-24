@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from './AuthContext'
-import { db, updateUser } from "./firebase";
+import { db, updateUser, updateUserLocality, recordWebsiteVisit } from "./firebase";
 
 import Navbar from './components/Navbar/Navbar';
 import Loader from './components/Loader/Loader';
@@ -20,12 +20,14 @@ import UserProfile from "./pages/userProfile/UserProfile";
 import ListUsers from "./pages/ListUsers";
 import EditUser from "./pages/EditUser";
 import { doc, getDoc } from "firebase/firestore";
-import PaymentPage2 from "./pages/Payments/PaymentPage2";
+import PaymentPage from "./pages/Payments/PaymentPage";
+import { useCurrency } from "./CurrencyContext";
 
 
 function App() {
   const [loading, setLoading] = useState(false);
   const { currentUser } = useContext(AuthContext);
+  const { symbol, currency, convertPrice, locality  } = useCurrency();
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -74,10 +76,40 @@ function App() {
     if (currentUser) {
       fetchUserDataWithRetry();
     }
-  }, [currentUser]);
+  }, [currentUser]); 
 
 
   useEffect(() => {
+    // Device Detection
+    function getUserPlatform() {
+      const ua = navigator.userAgent;
+      const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+      if (isIOS) return 'ios';
+      if (/Android/.test(ua)) return 'android';
+      if (/Windows/.test(ua)) return 'windows';
+      if (/Macintosh/.test(ua)) return 'mac';
+      return 'pwa';
+    }
+    
+    if (userData  && !userData.locality) {
+      updateUserLocality(currentUser.email, locality);
+    }
+
+
+    const device = getUserPlatform()
+    if (userData && navigator.userAgentData) {
+      navigator.userAgentData.getHighEntropyValues([
+        "architecture", 
+        "model", 
+        "platformVersion", 
+        "fullVersionList" 
+      ])
+      .then(info => {
+        recordWebsiteVisit(currentUser.email, window.location.hostname, {device,...info});
+      });
+    }
+
+
     if (userData && userData.isPremium) {
       const currentTime = new Date(); // Current time
       const previousTime = new Date(userData.subDate); // Assuming userData.subDate is the subscription start date
@@ -135,7 +167,7 @@ function App() {
             <Navbar />
             <Routes>
               <Route path='/' element={<Home userData={userData} />} />
-              <Route path='pay' element={currentUser ? <PaymentPage2 setUserData={setUserData} /> : <Login />} />
+              <Route path='pay' element={currentUser ? <PaymentPage setUserData={setUserData} /> : <Login />} />
               <Route path='admin/tips' element={currentUser ? <AdminTips /> : <Login />} />
               <Route path='edit' element={currentUser ? <EditTip /> : <Login />} />
               <Route path='users' element={currentUser ? <ListUsers /> : <Login />} />

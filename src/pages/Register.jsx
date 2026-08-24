@@ -4,6 +4,7 @@ import { AuthContext } from "../AuthContext";
 import AppHelmet from "../components/AppHelmet";
 import { registerUser } from "../firebase";
 import { NavLink } from "react-router-dom";
+import { useCurrency } from "../CurrencyContext";
 
 const Register = () => {
 	const { currentUser } = useContext(AuthContext);
@@ -12,6 +13,7 @@ const Register = () => {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
 	const [success, setSuccess] = useState(null);
+	const { symbol, currency, convertPrice, locality  } = useCurrency();
 
 	const handleRegister = async (e) => {
 		e.preventDefault();

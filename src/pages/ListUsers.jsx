@@ -60,7 +60,8 @@ export default function ListUsers() {
 			const subscriptionMatch =
 				subscriptionFilter === "All" ||
 				(subscriptionFilter === "Free" && !user.isPremium) ||
-				(subscriptionFilter === "Premium" && user.isPremium);
+				(subscriptionFilter === "Premium" && user.isPremium) ||
+				(subscriptionFilter === "withLocality" && user.locality);
 
 			// Filter by search query (search in username, email, and subscription type)
 			const searchMatch =
@@ -94,12 +95,14 @@ export default function ListUsers() {
 						<option value="All">All Users</option>
 						<option value="Free">Free Users</option>
 						<option value="Premium">Premium Users</option>
+						<option value="withLocality">With Locality</option>
 					</select>
 				)}
 			</div>
 
+            <div className="wrapper">
 			{filteredUsers.length > 0
-				? filteredUsers.map((user) => {
+				? filteredUsers.slice(0, 10).map((user) => {
 						return <UserCard key={user.email} user={user} />;
 				  })
 				: !loading && (
@@ -107,6 +110,7 @@ export default function ListUsers() {
 							No users found matching your criteria
 						</div>
 				  )}
+			</div>
 		</div>
 	);
 }

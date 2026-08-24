@@ -1,5 +1,7 @@
 .user-card-minimal {
-  width: 240px;
+  //width: calc((100% - (4 * 16px)) / 5);
+  width: calc((100% - 48px) / 4); 
+  min-width: 280px;
   background: var(--card-bg);
   backdrop-filter: blur(12px);
   border: 1px solid var(--card-border);
@@ -65,6 +67,7 @@
 
     .user-info-compact {
       margin-bottom: 14px;
+      position: relative;
 
       .plan-name {
         font-size: 1rem;
@@ -79,6 +82,18 @@
         font-size: 0.82rem;
         color: var(--text-muted);
         font-weight: 500;
+      }
+
+      .detail-icon{
+        top: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        margin-right: 16px;
+
+        font-size: 1rem;
+        color: var(--text-muted);
+        flex-shrink: 0;
       }
     }
 
@@ -111,8 +126,8 @@
     }
   }
 
-  @media screen and (max-width: 448px) {
+  @media screen and (max-width: 480px) {
     width: 100%;
-    max-width: 300px;
+    /*max-width: 300px;*/
   }
 }

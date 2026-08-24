@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
-import { addDoc, collection, doc, getDoc, getDocs, getFirestore, limit, query, updateDoc, where, orderBy, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, limit, query, updateDoc, serverTimestamp, where, orderBy, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBqHfrwEOoYkTJzi4XQsFfh4M3xjg8e6bs",
@@ -27,7 +27,7 @@ export const signInUser = (email, password, setError) => {
   return;
 }
 
-export const registerUser = (username, email, password, setSuccess, setError) => {
+export const registerUser = (username, email, password, locality, setSuccess, setError) => {
   createUserWithEmailAndPassword(auth, email, password).then(async (userCredential) => {
     const user = userCredential.user;
     const userDocRef = doc(db, "users", user.email);
@@ -35,6 +35,7 @@ export const registerUser = (username, email, password, setSuccess, setError) =>
       email: user.email,
       username: username,
       isPremium: false,
+      locality,
       subscription: null
     }, { merge: true }).then(async (response) => {
       setSuccess(`User with ${user.email} has been registered successfully`)
@@ -48,6 +49,50 @@ export const registerUser = (username, email, password, setSuccess, setError) =>
   });
   return;
 }
+
+
+export const updateUserLocality = async (userId, locality) => {
+  const usercollref = doc(db, 'users', userId)
+  updateDoc(usercollref, {
+    'locality' : locality
+  }).then(response => {
+    /*setNotification({
+      isVisible: true,
+      type: 'success',
+      message: "user data updated!",
+    });*/
+  }).catch(error => {
+    /*setNotification({
+      isVisible: true,
+      type: 'error',
+      message: "An Unkown Error Occurred" + error.message,
+    });*/
+  })
+} 
+
+
+export const recordWebsiteVisit = async (userId, websiteUrl, device) => {
+  if (!userId || !websiteUrl) return;
+
+  // Clean the URL string so it doesn't contain '.' characters in the key name 
+  // (Firestore uses dots for nested paths, so we replace them or encode them)
+  const safeWebKey = websiteUrl.replace(/\./g, '_'); 
+
+  const userDocRef = doc(db, 'users', userId);
+
+  try {
+    await updateDoc(userDocRef, {
+      // Overwrites or creates 'visitedWebsites.example_com' with the current time
+      [`visitedWebsites.${safeWebKey}`]: {
+        originalUrl: websiteUrl,
+        device,
+        lastVisitedAt: serverTimestamp() // Uses Firebase's server time
+      }
+    });
+  } catch (error) {
+    //console.error("Error recording website visit:", error);
+  }
+};
 
 export const resetPassword = async (email, setSuccess, setError) => {
   try {

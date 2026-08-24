@@ -816,6 +816,18 @@
 			cursor: pointer;
 		}
 	}
+
+	.wrapper{
+		width: 100%;
+		height: fit-content;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: flex-start;
+		padding: 10px;
+		gap: 16px;
+	}
+	  
 }
 
 .no-results {
