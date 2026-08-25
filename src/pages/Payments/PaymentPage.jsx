@@ -275,7 +275,7 @@ export default function PaymentPage({ setUserData }) {
         return <PaystackPayments {...commonProps} />;
       case "korapay":
       default:
-        return currency === "KES" ? <PaystackPayments {...commonProps} /> : <KorapayPayments {...commonProps} />;
+        return /*currency === "KES" ? <PaystackPayments {...commonProps} /> : */<KorapayPayments {...commonProps} />;
     }
   };
 
