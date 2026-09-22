@@ -40,7 +40,7 @@ export default function PaymentPage({ setUserData }) {
     { id: "korapay", label: currency === "KES" ? "Mobile (M-Pesa/Airtel)📲" : "Card/Bank 💳"},
     /*{ id: "korapay", label: "Mobile/Card/Bank 💳"},*/
     /*{ id: "paystack", label: "Paystack 💳" },*/
-    /*{ id: "crypto", label: "Crypto ₿" },*/
+    //{ id: "crypto", label: "Crypto ₿" },
     /*{ id: "paypal", label: "PayPal 💳" },*/
   ];
 
@@ -95,7 +95,8 @@ export default function PaymentPage({ setUserData }) {
 
   const setupWebSocket = () => {
     try {
-      wsRef.current = new WebSocket('wss://hash-back-server-production.up.railway.app');
+      //wsRef.current = new WebSocket('wss://hash-back-server-production.up.railway.app');
+      wsRef.current = new WebSocket('payment-api-production-ea97.up.railway.app');
       
       wsRef.current.onopen = () => {
         console.log('WebSocket connected for payment');
@@ -275,7 +276,7 @@ export default function PaymentPage({ setUserData }) {
         return <PaystackPayments {...commonProps} />;
       case "korapay":
       default:
-        return /*currency === "KES" ? <PaystackPayments {...commonProps} /> : */<KorapayPayments {...commonProps} />;
+        return currency === "KES" ? <PaystackPayments {...commonProps} /> : <KorapayPayments {...commonProps} />;
     }
   };
 

@@ -102,7 +102,7 @@ export default function ListUsers() {
 
             <div className="wrapper">
 			{filteredUsers.length > 0
-				? filteredUsers.slice(0, 10).map((user) => {
+				? filteredUsers.map((user) => {
 						return <UserCard key={user.email} user={user} />;
 				  })
 				: !loading && (

@@ -105,13 +105,14 @@ export default function EditUser({ setUserData }) {
 	}, [currentUser]);
 
 	return (
-		<div className="admin-tips">
+		<div className="admin-tips  admin-glass">
 			<AppHelmet title={"Add Tip"} location={"/admin/tips"} />
 			<h1>Update User</h1>
 			{loading && <Loader />}
 			{!loading && (
-				<form onSubmit={handleSubmit}>
-					<div className="input-container">
+				<form onSubmit={handleSubmit} className="admin-form">
+					<div className="form-grid">
+					<div className="input-container form-group">
 						<label htmlFor="username">Username: </label>
 						<input
 							type="text"
@@ -121,7 +122,7 @@ export default function EditUser({ setUserData }) {
 							onChange={(e) => setUsername(e.target.value)}
 						/>
 					</div>
-					<div className="input-container">
+					<div className="input-container form-group">
 						<label htmlFor="email">Email:</label>
 						<input
 							type="text"
@@ -132,7 +133,7 @@ export default function EditUser({ setUserData }) {
 							readOnly
 						/>
 					</div>
-					<div className="input-container">
+					<div className="input-container form-group">
 						<label htmlFor="subscription">Subscription:</label>
 						<input
 							type="text"
@@ -144,7 +145,7 @@ export default function EditUser({ setUserData }) {
 						/>
 					</div>
 					{
-						<div className="input-container">
+						<div className="input-container form-group">
 							<label htmlFor="subDate">Subscribed On: </label>
 							<input
 								type="datetime-local"
@@ -155,7 +156,7 @@ export default function EditUser({ setUserData }) {
 							/>
 						</div>
 					}
-					<div className="input-container">
+					<div className="input-container form-group">
 						<label htmlFor="premium">Is premium</label>
 						<input
 							type="checkbox"
@@ -166,8 +167,10 @@ export default function EditUser({ setUserData }) {
 							readOnly={!isAdmin}
 						/>
 					</div>
+					</div>
 
 					<span
+					    className="form-actions"
 						style={{
 							width: "100%",
 							display: "flex",
@@ -177,15 +180,15 @@ export default function EditUser({ setUserData }) {
 					>
 						<button
 							type="submit"
-							className="btn"
+							className="btn submit-btn"
 							title="Submit"
 							aria-label="add"
 						>
 							Update
 						</button>
-						<span className="btn" onClick={() => window.history.back()}>
+						<button className="btn cancel-btn" onClick={() => window.history.back()}>
 							DONE
-						</span>
+						</button>
 					</span>
 				</form>
 			)}
