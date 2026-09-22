@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { getTips } from "../firebase";
 import Loader from "../components/Loader/Loader";
 import AppHelmet from "../components/AppHelmet";
+import { tipDateTimeToDate } from '../dateUtils';
 
 export default function Tips({ userData }) {
 	const [loading, setLoading] = useState(true);
@@ -101,6 +102,7 @@ export default function Tips({ userData }) {
 		setActive(tip);
 		document.querySelector(".post-detail").classList.add("active");
 	};
+
 	return (
 		<div className="tips">
 			<AppHelmet title={"Goalytips"} location={"/"} />
@@ -138,8 +140,16 @@ export default function Tips({ userData }) {
 									? tip.premium === false
 									: tip.premium === true
 							)
-							.map((tip) => (
-								<div
+							.map((tip) => {
+								const tipDate = tipDateTimeToDate(tip.date, tip.time);
+
+                                const localTime = tipDate
+                                  ? new Intl.DateTimeFormat(undefined, {
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false,
+                                    }).format(tipDate) : tip.time;
+								return (<div
 									className="tip-card"
 									key={tip.id}
 									onClick={() => handleClick(tip)}
@@ -171,7 +181,7 @@ export default function Tips({ userData }) {
 											</span>
 
 											<span>
-												<span className="time">⏱ {tip.time}</span>
+												<span className="time">⏱ {localTime}</span>
 											</span>
 											<span>
 												{tip.won === "won" ? (
@@ -194,7 +204,8 @@ export default function Tips({ userData }) {
 										</div>
 									</div>
 								</div>
-							))
+							)
+						})
 					) : loading ? (
 						<></>
 					) : (
