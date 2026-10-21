@@ -17,7 +17,7 @@ const Register = () => {
 
 	const handleRegister = async (e) => {
 		e.preventDefault();
-		registerUser(username, email, password, setSuccess, setError);
+		registerUser(username, email, password, locality, setSuccess, setError);
 	};
 
 	useEffect(() => {
