@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import Swal from "sweetalert2";
 
-const PAYMENT_API_BASE = "https://payment-api-production-ea97.up.railway.app/api";
+const PAYMENT_API_BASE = "https://genuine-flow-production-b0ae.up.railway.app/api";
 
 export default function PaystackPayments({ 
   price, 
