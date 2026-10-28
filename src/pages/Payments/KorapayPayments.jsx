@@ -60,7 +60,7 @@ export default function KorapayPayments({
           cursor: isProcessing ? "not-allowed" : "pointer"
         }}
       >
-        {isProcessing ? "Processing..." : "Pay with Korapay"}
+        {isProcessing ? "Processing..." : "Pay Now"}
       </button>
     </div>
   );
